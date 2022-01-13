@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<table style="width:500px;">
+  {% for club in clubs %}
+  <tr>
+    <td style="border: 1px solid #333;">{{club['name']}}</td>
+    <td style="border: 1px solid #333;">{{club['points']}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+</body>
+</html>

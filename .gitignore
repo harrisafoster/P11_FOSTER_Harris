@@ -6,3 +6,4 @@ lib
 __pycache__
 env/
 .idea
+report_intial_locust.html

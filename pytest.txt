@@ -1,0 +1,74 @@
+============================= test session starts =============================
+platform win32 -- Python 3.9.1, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Harris\Desktop\Formation crap\P11_FOSTER_Harris\gudlft
+plugins: flask-1.2.0
+collecting ... collected 8 items
+
+tests/integration_tests/test_server_integration.py::test_not_enough_points FAILED [ 12%]
+tests/integration_tests/test_server_integration.py::test_overbook FAILED [ 25%]
+tests/integration_tests/test_server_integration.py::test_point_change_reflection PASSED [ 37%]
+tests/integration_tests/test_server_integration.py::test_book_past_event PASSED [ 50%]
+tests/unit_tests/test_server_unit.py::test_connection_invalid FAILED     [ 62%]
+tests/unit_tests/test_server_unit.py::test_connection_valid PASSED       [ 75%]
+tests/unit_tests/test_server_unit.py::test_logout PASSED                 [ 87%]
+tests/unit_tests/test_server_unit.py::test_points_display PASSED         [100%]
+
+================================== FAILURES ===================================
+___________________________ test_not_enough_points ____________________________
+
+    def test_not_enough_points():
+        app.test_client().get('/')
+        app.test_client().post('/show_summary', data=dict(email="john@simplylift.co", ))
+        app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
+        response = app.test_client().post('/purchase_places',
+                                          data=dict(places=50, competition='Fall Classic', club='Simply Lift'))
+>       assert "You don't have enough points." in str(response.data)
+E       assert "You don't have enough points." in 'b\'<html lang="en">\\n<head>\\n    <meta charset="UTF-8">\\n    <meta name="viewport" content="width=device-width, in... of Places: -37\\n            \\n        </li>\\n        <hr />\\n        \\n    </ul>\\n    \\n\\n</body>\\n</html>\''
+E        +  where 'b\'<html lang="en">\\n<head>\\n    <meta charset="UTF-8">\\n    <meta name="viewport" content="width=device-width, in... of Places: -37\\n            \\n        </li>\\n        <hr />\\n        \\n    </ul>\\n    \\n\\n</body>\\n</html>\'' = str(b'<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial...     Number of Places: -37\n            \n        </li>\n        <hr />\n        \n    </ul>\n    \n\n</body>\n</html>')
+E        +    where b'<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial...     Number of Places: -37\n            \n        </li>\n        <hr />\n        \n    </ul>\n    \n\n</body>\n</html>' = <WrapperTestResponse 905 bytes [200 OK]>.data
+
+tests\integration_tests\test_server_integration.py:10: AssertionError
+________________________________ test_overbook ________________________________
+
+    def test_overbook():
+        app.test_client().get('/')
+        app.test_client().post('/show_summary', data=dict(email="john@simplylift.co", ))
+        app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
+        response = app.test_client().post('/purchase_places',
+                                          data=dict(places=13, competition='Fall Classic', club='Simply Lift'))
+>       assert "Clubs cannot reserve more than 12 places per competition" in str(response.data)
+E       assert 'Clubs cannot reserve more than 12 places per competition' in 'b\'<html lang="en">\\n<head>\\n    <meta charset="UTF-8">\\n    <meta name="viewport" content="width=device-width, in... of Places: -50\\n            \\n        </li>\\n        <hr />\\n        \\n    </ul>\\n    \\n\\n</body>\\n</html>\''
+E        +  where 'b\'<html lang="en">\\n<head>\\n    <meta charset="UTF-8">\\n    <meta name="viewport" content="width=device-width, in... of Places: -50\\n            \\n        </li>\\n        <hr />\\n        \\n    </ul>\\n    \\n\\n</body>\\n</html>\'' = str(b'<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial...     Number of Places: -50\n            \n        </li>\n        <hr />\n        \n    </ul>\n    \n\n</body>\n</html>')
+E        +    where b'<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial...     Number of Places: -50\n            \n        </li>\n        <hr />\n        \n    </ul>\n    \n\n</body>\n</html>' = <WrapperTestResponse 905 bytes [200 OK]>.data
+
+tests\integration_tests\test_server_integration.py:20: AssertionError
+___________________________ test_connection_invalid ___________________________
+
+    def test_connection_invalid():
+        response = app.test_client().post('/show_summary', data=dict(email='test@test.com', ))
+>       assert "Sorry, that email is not registered." in str(response.data)
+E       assert 'Sorry, that email is not registered.' in 'b\'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\\n<title>500 Internal Server Error</title>\\n<h1>Internal ...was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\\n\''
+E        +  where 'b\'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\\n<title>500 Internal Server Error</title>\\n<h1>Internal ...was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\\n\'' = str(b'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n<title>500 Internal Server Error</title>\n<h1>Internal Serv...nd was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\n')
+E        +    where b'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n<title>500 Internal Server Error</title>\n<h1>Internal Serv...nd was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>\n' = <WrapperTestResponse 290 bytes [500 INTERNAL SERVER ERROR]>.data
+
+tests\unit_tests\test_server_unit.py:6: AssertionError
+------------------------------ Captured log call ------------------------------
+ERROR    server:app.py:1457 Exception on /show_summary [POST]
+Traceback (most recent call last):
+  File "c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\Harris\Desktop\Formation crap\P11_FOSTER_Harris\gudlft\server.py", line 32, in show_summary
+    club = [club for club in clubs if club['email'] == request.form['email']][0]
+IndexError: list index out of range
+=========================== short test summary info ===========================
+FAILED tests/integration_tests/test_server_integration.py::test_not_enough_points
+FAILED tests/integration_tests/test_server_integration.py::test_overbook - as...
+FAILED tests/unit_tests/test_server_unit.py::test_connection_invalid - assert...
+========================= 3 failed, 5 passed in 0.22s =========================

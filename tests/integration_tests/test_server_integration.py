@@ -17,7 +17,7 @@ def test_overbook():
     app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
     response = app.test_client().post('/purchase_places',
                                       data=dict(places=13, competition='Fall Classic', club='Simply Lift'))
-    assert "Clubs cannot reserve more than 12 places per competition" in str(response.data)
+    assert "You cannot book more than 12 places." in str(response.data)
 
 
 def test_point_change_reflection():

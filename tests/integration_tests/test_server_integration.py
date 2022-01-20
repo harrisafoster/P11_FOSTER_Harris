@@ -14,10 +14,10 @@ def test_user_cannot_book_more_than_points_available():
 
 def test_user_cannot_book_more_than_12():
     app.test_client().get('/')
-    app.test_client().post('/show_summary', data=dict(email="john@simplylift.co", ))
-    app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
+    app.test_client().post('/show_summary', data=dict(email="admin@irontemple.com", ))
+    app.test_client().get('/book/Fall%20Classic/Iron%20Temple')
     response = app.test_client().post('/purchase_places',
-                                      data=dict(places=13, competition='Fall Classic', club='Simply Lift'))
+                                      data=dict(places=13, competition='Fall Classic', club='Iron Temple'))
     assert "You cannot book more than 12 places." in str(response.data)
     assert response.status_code == 200
 

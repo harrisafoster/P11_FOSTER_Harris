@@ -35,7 +35,6 @@ def show_summary():
         flash('Sorry, that email is not registered.')
         return render_template('index.html')
     else:
-        club = [club for club in clubs if club['email'] == request.form['email']][0]
         return render_template('welcome.html', club=club, competitions=competitions)
 
 

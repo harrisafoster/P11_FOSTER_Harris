@@ -1,0 +1,10 @@
+============================= test session starts =============================
+platform win32 -- Python 3.9.1, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- c:\users\harris\desktop\formation crap\p11_foster_harris\gudlft\env\scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Harris\Desktop\Formation crap\P11_FOSTER_Harris\gudlft
+plugins: flask-1.2.0
+collecting ... collected 9 items / 8 deselected / 1 selected
+
+tests/integration_tests/test_server_integration.py::test_one_place_costs_3 PASSED [100%]
+
+======================= 1 passed, 8 deselected in 0.06s =======================

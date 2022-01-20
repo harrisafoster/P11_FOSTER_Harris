@@ -37,3 +37,12 @@ def test_user_cannot_book_past_event():
     response = app.test_client().get('/book/Spring%20Festival/Simply%20Lift')
     assert b'How many places?' not in response.data
     assert response.status_code != 500
+
+
+def test_one_place_costs_3():
+    app.test_client().get('/')
+    app.test_client().post('/show_summary', data=dict(email="john@simplylift.co", ))
+    app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
+    response = app.test_client().post('/purchase_places', data=dict(places=4, competition='Fall Classic', club='Simply Lift'))
+    assert b'Points available: 1' in response.data
+    assert response.status_code == 200

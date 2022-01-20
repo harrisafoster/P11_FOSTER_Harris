@@ -7,7 +7,7 @@ def test_user_cannot_book_more_than_points_available():
     app.test_client().get('/book/Fall%20Classic/Simply%20Lift')
     response = app.test_client().post('/purchase_places',
                                       data=dict(places=50, competition='Fall Classic', club='Simply Lift'))
-    assert "You don't have enough points." in str(response.data)
+    assert "You do not have enough points." in str(response.data)
     assert "Points available: 13" in str(response.data)
     assert response.status_code == 200
 

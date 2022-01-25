@@ -29,6 +29,11 @@ def index():
 
 @app.route('/show_summary', methods=['POST'])
 def show_summary():
+    """
+    Error catching mechanism that fixed the 500 internal server error
+    resultant of trying to log in with an unregistered email.
+    :return: Redirect to summary or back to log in
+    """
     try:
         club = [club for club in clubs if club['email'] == request.form['email']][0]
     except IndexError:
@@ -40,6 +45,10 @@ def show_summary():
 
 @app.route('/book/<competition>/<club>')
 def book(competition, club):
+    """
+    Determines the availability of an event based on its date before sending the user to the booking page.
+    :return: Redirects to booking places for chosen event.
+    """
     foundClub = [c for c in clubs if c['name'] == club][0]
     foundCompetition = [c for c in competitions if c['name'] == competition][0]
     if foundCompetition['date'] < str(datetime.date.today()):
@@ -54,6 +63,12 @@ def book(competition, club):
 
 @app.route('/purchase_places', methods=['POST'])
 def purchase_places():
+    """
+    Checks the number of intended places against the maximum of 12
+    Checks the point cost of the intended reservation against the point total of the user
+    Multiplies the intended reservation by 3 to reflect the 3 points per place cost
+    :return: Redirects after reservation is made or redirects back to booking page if a condition is not met
+    """
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])

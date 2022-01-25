@@ -44,12 +44,12 @@
 
 5. Testing
 
-    * You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
-
     * The latest issues present in the code were tested using pytest==6.2.5 and pytest-flask==1.2.0 and then resolved in their respective branches.
     
     * All tests (pytest) were run before and after the bugs and improvements were handled. The results for these tests are included as .txt files.
-    
+
+    * In addition to the pytest results, locust performance results (regarding speed) are included via screenshots (before and after)    
+
     1. You can find all bugs and improvements in the following branches: 
        1. improvement/points_display_board 
        2. bug/points_updates 
@@ -58,6 +58,3 @@
        5. bug/spend_more_than_own_points
        6. bug/unknown_email_crash 
        7. feature/3_points_per_place
-    
-    * In addition to the pytest results, locust performance results (regarding speed) are included via screenshots (before and after)
-

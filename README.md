@@ -16,7 +16,7 @@ Projet 11 OpenClassrooms
 
 ## Installation
 ### Pour les développeurs et utilisateurs (windows 10, mac, linux) :
-#### Clonez la source de SoftDesk localement (en utilisant votre terminal) :
+#### Clonez la source de Güdlft localement (en utilisant votre terminal) :
 ```sh
 $ git clone https://github.com/harrisafoster/P11_FOSTER_Harris
 $ cd P11_FOSTER_Harris
